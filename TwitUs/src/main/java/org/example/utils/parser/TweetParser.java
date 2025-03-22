@@ -82,8 +82,7 @@ public class TweetParser {
         try {
             return Double.parseDouble(value);
         } catch (NumberFormatException e) {
-            System.err.println("Invalid coordinate format: " + value);
-            return null;
+            throw new RuntimeException("Invalid coordinate format: " + value);
         }
     }
 
@@ -91,8 +90,7 @@ public class TweetParser {
         try {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(timestamp);
         } catch (ParseException e) {
-            System.err.println("Invalid timestamp format: " + timestamp);
-            return null;
+            throw new RuntimeException("Invalid timestamp format: " + timestamp);
         }
     }
 

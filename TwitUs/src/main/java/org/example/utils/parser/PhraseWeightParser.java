@@ -3,7 +3,7 @@ package org.example.utils.parser;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class PhraseMoodParser {
+public class PhraseWeightParser {
 
     public static HashMap<String, Double> parse(String input) {
 
@@ -21,7 +21,7 @@ public class PhraseMoodParser {
                             double value = Double.parseDouble(parts[1].trim());
                             result.put(word, value);
                         } catch (NumberFormatException e) {
-                            System.err.println("Invalid number format in line: " + line);
+                            throw new RuntimeException("Invalid number format in line: " + line);
                         }
                     }
                 });

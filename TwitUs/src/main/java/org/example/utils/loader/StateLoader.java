@@ -1,15 +1,15 @@
 package org.example.utils.loader;
 
 import org.example.entity.State;
-import org.example.entity.Tweet;
+import org.example.utils.parser.StateParser;
 
 import java.util.List;
 
-public class StateLoader extends AbstractLoader<List<State>>{
+public class StateLoader extends AbstractLoader<List<State>> {
 
     @Override
     protected List<State> processContent(String content) {
-        return List.of();
+        return StateParser.parseStates(content);
     }
 
 }
