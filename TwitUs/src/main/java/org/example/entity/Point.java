@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Point {
 
-    private int x;
-    private int y;
+    private Double x;
+    private Double y;
 
 }
