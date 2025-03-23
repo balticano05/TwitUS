@@ -15,8 +15,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class Tweet extends Mood{
 
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
     private Date timestamp;
     private String text;
 
