@@ -3,8 +3,8 @@ package org.example.utils.parser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.entity.Point;
-import org.example.entity.Polygon;
 import org.example.entity.State;
+import org.example.entity.StatePolygon;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,60 +42,60 @@ public class StateParser {
         State state = new State();
         state.setName(stateName);
 
-        state.setPolygons(new ArrayList<>());
+        state.setStatePolygons(new ArrayList<>());
 
         JsonNode polygonsNode = rootNode.get(stateName);
 
         if (polygonsNode != null && polygonsNode.isArray()) {
 
             for (JsonNode polygonNode : polygonsNode) {
-                Polygon polygon = parsePolygon(polygonNode);
+                StatePolygon statePolygon = parsePolygon(polygonNode);
 
-                state.getPolygons().add(polygon);
+                state.getStatePolygons().add(statePolygon);
             }
         }
 
         return state;
     }
 
-    private static Polygon parsePolygon(JsonNode polygonNode) {
+    private static StatePolygon parsePolygon(JsonNode polygonNode) {
 
-        Polygon polygon = new Polygon();
-        polygon.setPoints(new ArrayList<>());
+        StatePolygon statePolygon = new StatePolygon();
+        statePolygon.setPoints(new ArrayList<>());
 
         if (polygonNode.isArray()) {
 
             if (!polygonNode.isEmpty() && polygonNode.get(0).isArray()) {
 
                 if (polygonNode.get(0).size() == 2 && polygonNode.get(0).get(0).isNumber()) {
-                    parsePoints(polygonNode, polygon);
+                    parsePoints(polygonNode, statePolygon);
                 } else {
-                    parseIslands(polygonNode, polygon);
+                    parseIslands(polygonNode, statePolygon);
                 }
             }
         }
 
-        return polygon;
+        return statePolygon;
     }
 
-    private static void parseIslands(JsonNode polygonNode, Polygon polygon) {
+    private static void parseIslands(JsonNode polygonNode, StatePolygon statePolygon) {
 
         for (JsonNode islandNode : polygonNode) {
 
             if (islandNode.isArray()) {
-                parsePoints(islandNode, polygon);
+                parsePoints(islandNode, statePolygon);
             }
         }
     }
 
-    private static void parsePoints(JsonNode pointsNode, Polygon polygon) {
+    private static void parsePoints(JsonNode pointsNode, StatePolygon statePolygon) {
 
         for (JsonNode pointNode : pointsNode) {
 
             if (pointNode.isArray() && pointNode.size() == 2) {
 
                 Point point = parsePoint(pointNode);
-                polygon.getPoints().add(point);
+                statePolygon.getPoints().add(point);
             }
         }
     }

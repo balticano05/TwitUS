@@ -1,8 +1,8 @@
 package org.example.service;
 
 import org.example.entity.Point;
-import org.example.entity.Polygon;
 import org.example.entity.State;
+import org.example.entity.StatePolygon;
 import org.example.entity.Tweet;
 
 import java.awt.geom.Point2D;
@@ -88,9 +88,9 @@ public class WeightCalculator {
 
     private boolean isInState(Point2D.Double point, State state) {
 
-        for (Polygon polygon : state.getPolygons()) {
+        for (StatePolygon statePolygon : state.getStatePolygons()) {
 
-            if (rayCastingAlgorithm(point, polygon.getPoints())) {
+            if (rayCastingAlgorithm(point, statePolygon.getPoints())) {
                 return true;
             }
         }
@@ -121,7 +121,7 @@ public class WeightCalculator {
 
         for (State state : states) {
 
-            List<Point2D.Double> allPoints = state.getPolygons().stream()
+            List<Point2D.Double> allPoints = state.getStatePolygons().stream()
                     .flatMap(p -> p.getPoints().stream())
                     .map(this::convertPoint)
                     .collect(Collectors.toList());

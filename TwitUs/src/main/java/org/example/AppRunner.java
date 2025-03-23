@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.entity.State;
 import org.example.entity.Tweet;
+import org.example.render.MapFrame;
 import org.example.service.WeightCalculator;
 import org.example.utils.loader.PhraseWeightLoader;
 import org.example.utils.loader.StateLoader;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class AppRunner {
 
-    public static void run(){
+    public static void run() {
 
         TweetLoader tweetLoader = new TweetLoader();
         StateLoader stateLoader = new StateLoader();
@@ -26,6 +27,9 @@ public class AppRunner {
 
         tweets.forEach(tweet -> tweet.setWeightOfMood(weightCalculator.calculateForTweet(tweet.getText())));
         weightCalculator.calculateForStates(tweets, states);
+
+        MapFrame mapFrame = new MapFrame(states, tweets);
+        mapFrame.display();
 
     }
 

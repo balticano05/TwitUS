@@ -11,6 +11,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Polygon {
+public class StatePolygon {
     private List<Point> points;
 }

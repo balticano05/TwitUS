@@ -14,6 +14,6 @@ import java.util.List;
 public class State extends Mood {
 
     private String name;
-    private List<Polygon> polygons;
+    private List<StatePolygon> statePolygons;
 
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tweet extends Mood{
+public class Tweet extends Mood {
 
     private Double latitude;
     private Double longitude;
